@@ -1,38 +1,53 @@
-import org.junit.After;
-import org.junit.Before;
+import io.qameta.allure.Attachment;
+import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
-import java.time.Duration;
-
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest {
-    WebDriver driver;
+public class LoginTest extends TestBase {
 
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "/C:/Users/anyut/chromedriver.exe");
-        driver = new ChromeDriver();
-        String BASE_URL = "https://www.saucedemo.com/";
-        driver.get(BASE_URL);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(200));
-        driver.manage().window().maximize();
-    }
 
     @Test
     public void loginWithValidDate() {
-        String username = "standard-user";
-        String password = "secret_sauce";
-        LoginPage loginPage = new LoginPage(driver);
-        InventoryPage inventoryPage = new InventoryPage(driver);
-        loginPage.login(username, password);
-        assertTrue(inventoryPage.inventoryList.isDisplayed());
+        User user = new User(username, password);
+        new LoginPage(driver).login(user).setInventoryListShouldBeDisplayed();
     }
 
-    @After
-    public void TearDown() {
-        driver.quit();
+    @Test
+    public void allLoginPageElementsAreDisplayed(){
+        LoginPage loginPage = new LoginPage(driver);
+        assertTrue(loginPage.logoIsDisplayed());
+        loginPage.fieldUsernameIsDisplayed();
+        loginPage.fieldPasswordIsDisplayed();
+        loginPage.botIsDisplayed();
+        loginPage.loginButtonShouldBeDisplayed();
+        loginPage.acceptedUsernameAreIsDisplayed();
+        loginPage.passwordForAllUsersIsDisplayed();
     }
+
+
+
+    @Test
+    public void loginLockOut(){
+        User user = new User (lockedOut, passwordLocked);
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(user);
+        loginPage.loginButtonShouldBeDisplayed();
+        //loginPage.messageLockedUserShouldBeDisplayed();
+    }
+
+    @Test
+    public void loginInvalid(){
+        User user = new User (userInvalid, passwordInvalid);
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(user);
+        loginPage.loginButtonShouldBeDisplayed();
+        loginPage.messageInvalidUserShouldBeDisplayed();
+    }
+
 }

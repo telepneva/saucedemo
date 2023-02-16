@@ -42,6 +42,34 @@ public class Saucedemo {
 
     }
 
+    @Test
+    public void loginWithNotValueDate() {
+        WebElement userName = driver.findElement(By.id("user-name"));
+        userName.sendKeys("standard_user");
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("secret_sauce");
+
+        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+        submitButton.click();
+        assertFalse(driver.getCurrentUrl().contains("result"));
+
+        WebElement header = driver.findElement(By.cssSelector("[class=title]"));
+    }
+
+
+    @Test
+    public void loginWithNotValueDate1() {
+        WebElement userName = driver.findElement(By.id("user-name"));
+        userName.sendKeys("standard_user");
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("secret_sauce");
+
+        WebElement submitButton = driver.findElement(By.cssSelector("[type='submit']"));
+        submitButton.click();
+        assertFalse(driver.getCurrentUrl().contains("result"));
+
+        WebElement header = driver.findElement(By.cssSelector("[class=title]"));
+    }
     @After
     public void TearDown() {
         driver.quit();
