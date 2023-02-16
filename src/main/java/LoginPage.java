@@ -87,4 +87,6 @@ public class LoginPage extends BasePage {
         return new InventoryPage(driver);
     }
 
+    //public void loginWithValidate()
+
 }

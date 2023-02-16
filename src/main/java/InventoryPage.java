@@ -1,3 +1,4 @@
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+import static com.beust.jcommander.Strings.startsWith;
 import static java.lang.Thread.sleep;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static net.bytebuddy.matcher.ElementMatchers.is;
+import static org.hamcrest.MatcherAssert.*;
 import static org.junit.Assert.*;
 
 public class InventoryPage extends BasePage {
@@ -103,6 +106,9 @@ public class InventoryPage extends BasePage {
     //BackPack
     @FindBy(id = "add-to-cart-sauce-labs-backpack")
     private WebElement addOnToCartBackpack;
+
+    @FindBy(id = "add-to-cart-sauce-labs-bike-light")
+    private WebElement addBikeLightToCartButton;
 
     //Tests
 
@@ -209,7 +215,9 @@ public class InventoryPage extends BasePage {
 
     public void aboutIsDisplayed() {
         assertTrue(aboutSideBar.isDisplayed());
-    }
+        //assertThat(aboutSideBar.isDisplayed(),is(true));
+        //assertThat(aboutSideBar.getAttribute("href"), startsWith("https//"));
+   }
 
     public void logoutIsDisplayed() {
         assertTrue(logout.isDisplayed());
@@ -261,6 +269,10 @@ public class InventoryPage extends BasePage {
         addOnToCartBackpack.click();
     }
 
+    public void clickOnAddToCartBikeLight(){
+        clickOnTheElement(addBikeLightToCartButton);
+    }
+
     public void clickOnTheCartIcon(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.elementToBeClickable(productBadge));
@@ -271,6 +283,16 @@ public class InventoryPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.elementToBeClickable(resetApp));
        resetApp.click();
+    }
+
+    public void resetAppState(){
+        clickOnTheSideBarOpenIcon();
+        resetAppClick();
+        clickOnTheSideBarCloseIcon();
+        refreshPage();
+    }
+    public void resetAppClick(){
+        resetApp.click();
     }
 
 

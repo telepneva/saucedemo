@@ -11,7 +11,7 @@ public class CartPageTests extends TestBase {
         loginPage.login(user);
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.clickOnTheSideBarOpenIcon();
-        inventoryPage.resetAppStateIsDisplayed();
+        inventoryPage.resetAppClick();
         inventoryPage.clickOnTheSideBarCloseIcon();
         inventoryPage.refreshPage();
 
@@ -19,5 +19,20 @@ public class CartPageTests extends TestBase {
         inventoryPage.clickOnTheCartIcon();
         CartPage cartPage = new CartPage(driver);
         assertTrue(cartPage.clickButtonCheckout());
+    }
+
+    @Test
+    public void addSeveralItems(){
+        User user = new User(username, password);
+        new LoginPage(driver).login(user);
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.resetAppStateIsDisplayed();
+        inventoryPage.clickOnToBackpack();
+        inventoryPage.clickOnAddToCartBikeLight();
+        inventoryPage.clickSortCloseIcon();
+        CartPage cartPage = new CartPage(driver);
+        assertTrue(cartPage.checkProductCardsQuantity(2));
+
+
     }
 }
