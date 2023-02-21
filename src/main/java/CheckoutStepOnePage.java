@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,19 +24,22 @@ public class CheckoutStepOnePage extends BasePage{
 
 
 
-
+    @Step("Enter first name")
     public void enterFirstName(String name){
         enterTextToElement(name, firstName);
     }
 
+    @Step("Enter last name")
     public void enterLastName(String lastNameValue){
         enterTextToElement(lastNameValue, lastName);
     }
 
+    @Step("Enter xip code")
     public void enterZipCode(String zipValue){
         enterTextToElement(zipValue, zipCode);
     }
 
+    @Step("Push continue button")
     public void pushContinueButton(){
         clickOnTheElement(continueButton);
     }

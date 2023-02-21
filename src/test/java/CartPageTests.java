@@ -45,6 +45,18 @@ public class CartPageTests extends TestBase {
     }
 
     @Test
+    public void cartIsEmptyNew(){
+        User user = new User(username, password);
+        new LoginPage(driver).login(user);
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.resetAppState();
+        inventoryPage.clickToTheBadge();
+        CartPage cartPage = new CartPage(driver);
+        assertTrue(cartPage.cartListIsEmptyNew());
+
+    }
+
+    @Test
     public void cartIsEmptyAfterDelete() {
         User user = new User(username, password);
         new LoginPage(driver).login(user);
