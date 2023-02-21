@@ -20,6 +20,9 @@ public class CartPage extends BasePage{
     @FindBy(className = "cart_item_label")
     private List<WebElement> productsName;
 
+    @FindBy(id = "remove-sauce-labs-backpack")
+    private WebElement buttonRemoveCartPage;
+
 
 
     public boolean clickButtonCheckout(){
@@ -30,8 +33,12 @@ public class CartPage extends BasePage{
       return productsCard.size() == expectedQuantity;
      }
 
+     public void cartListIsEmpty(){ productsName.isEmpty();}
+
      public void clickOnCheckoutButton(){
         buttonCheckout.click();
      }
+
+     public void clickButtonRemoveCartPage(){ buttonRemoveCartPage.click();}
 
 }

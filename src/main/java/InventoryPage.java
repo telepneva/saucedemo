@@ -110,6 +110,9 @@ public class InventoryPage extends BasePage {
     @FindBy(id = "add-to-cart-sauce-labs-bike-light")
     private WebElement addBikeLightToCartButton;
 
+    @FindBy(id = "add-to-cart-sauce-labs-backpack")
+    private WebElement addLabsBackPack;
+
     //Tests
 
     public InventoryPage(WebDriver driver) {
@@ -172,6 +175,9 @@ public class InventoryPage extends BasePage {
 
     public void setProductBadge() {
         assertTrue(productBadge.isDisplayed());
+    }
+    public void clickToTheBadge(){
+        productBadge.click();
     }
 
 
@@ -264,13 +270,15 @@ public class InventoryPage extends BasePage {
         }
 
     public void clickOnToBackpack(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(addOnToCartBackpack));
         addOnToCartBackpack.click();
     }
 
+
     public void clickOnAddToCartBikeLight(){
         clickOnTheElement(addBikeLightToCartButton);
+    }
+    public void clickOnAddToLabsBackPack(){
+        clickOnTheElement(addLabsBackPack);
     }
 
     public void clickOnTheCartIcon(){
@@ -284,15 +292,15 @@ public class InventoryPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(resetApp));
        resetApp.click();
     }
+    public void resetAppClick(){
+        resetApp.click();
+    }
 
     public void resetAppState(){
         clickOnTheSideBarOpenIcon();
-        resetAppClick();
+        clickOnTheResetAppState();
         clickOnTheSideBarCloseIcon();
         refreshPage();
-    }
-    public void resetAppClick(){
-        resetApp.click();
     }
 
 
