@@ -52,7 +52,7 @@ public class CartPage extends BasePage{
         return empty;
      }
 
-     public void cartListIsEmpty(){ productsName.isEmpty();}
+     public boolean cartListIsEmpty(){return productsName.isEmpty();}
 
     @Step("Click on checkout button")
      public void clickOnCheckoutButton(){

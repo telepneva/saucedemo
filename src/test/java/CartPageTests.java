@@ -41,11 +41,11 @@ public class CartPageTests extends TestBase {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.clickToTheBadge();
         CartPage cartPage = new CartPage(driver);
-        cartPage.cartListIsEmpty();
+        assertTrue(cartPage.cartListIsEmpty());
     }
 
     @Test
-    public void cartIsEmptyNew(){
+    public void cartIsEmptyNew() {
         User user = new User(username, password);
         new LoginPage(driver).login(user);
         InventoryPage inventoryPage = new InventoryPage(driver);
@@ -67,8 +67,21 @@ public class CartPageTests extends TestBase {
         CartPage cartPage = new CartPage(driver);
         assertTrue(cartPage.checkProductCardsQuantity(1));
         cartPage.clickButtonRemoveCartPage();
-        cartPage.cartListIsEmpty();
+        assertTrue(cartPage.cartListIsEmpty());
 
     }
 
+    @Test
+    public void checkTheAmountOfItemsInTheCart() {
+        User user = new User(username, password);
+        new LoginPage(driver).login(user);
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.resetAppState();
+        inventoryPage.clickOnToBackpack();
+        inventoryPage.clickOnAddToCartBikeLight();
+        inventoryPage.clickToTheBadge();
+        CartPage cartPage = new CartPage(driver);
+
+
+    }
 }

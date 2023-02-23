@@ -38,7 +38,7 @@ public class TestBase {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "/C:/Users/anyut/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/C:/Users/anyut/Webdriver/chromedriver.exe");
         driver = new ChromeDriver();
         String BASE_URL = "https://www.saucedemo.com/";
         driver.get(BASE_URL);

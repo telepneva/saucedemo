@@ -98,7 +98,7 @@
                 <version>2.20</version>
                 <configuration>
                     <includes>
-                        <!--<include>**/CartPageTests.java</include>-->
+                        <include>**/CartPageTests.java</include>
                     </includes>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
